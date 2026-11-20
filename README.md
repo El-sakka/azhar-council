@@ -17,6 +17,15 @@ To use a different database, set `DB_URL`, `DB_USERNAME` and `DB_PASSWORD`. Flyw
 
 `mvn test` runs unit tests and an integration test. The integration test applies every migration to a fresh PostgreSQL in Testcontainers, so Docker must be running.
 
+## Deploy for free (Render + Neon)
+
+1. **Database:** at [neon.tech](https://neon.tech), create a free project. From its connection details, take the host, database, user and password. Build the JDBC URL as `jdbc:postgresql://<host>/<database>?sslmode=require`.
+2. **Code:** push this repository to GitHub (a private repo is fine).
+3. **App:** at [render.com](https://render.com), choose **New → Blueprint** and select the repo. Render reads `render.yaml`. Fill in `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, and an `ADMIN_PASSWORD` of your choice.
+4. When the first deploy finishes, Flyway creates and fills the database. Sign in as **Admin** with your `ADMIN_PASSWORD`.
+
+On the free plan the service sleeps after 15 idle minutes. The first visit after that takes about a minute to wake it.
+
 ## Pages (`src/main/resources/static`)
 
 | Page | Contents |
