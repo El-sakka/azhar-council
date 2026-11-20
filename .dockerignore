@@ -1,0 +1,8 @@
+target/
+.git/
+.idea/
+.vscode/
+tools/
+*.docx
+all-screens.html
+docker-compose.yml

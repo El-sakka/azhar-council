@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: azhar-archive-db
+    environment:
+      POSTGRES_DB: azhar_archive
+      POSTGRES_USER: azhar
+      POSTGRES_PASSWORD: azhar
+    ports:
+      - "5433:5432"
+    volumes:
+      - azhar-archive-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U azhar -d azhar_archive"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  azhar-archive-data:

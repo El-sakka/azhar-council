@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>الواجهة — وثائق وسجلات المجلس الأعلى للأزهر</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div id="shell"></div>
+
+<main>
+  <!-- الرئيسية -->
+  <section data-page="home">
+    <div class="hero">
+      <span class="eyebrow">ذاكرة مؤسسية • 1917 – 1980م</span>
+      <h2>قاعدة بيانات وثائق وسجلات المجلس الأعلى للأزهر<br>المحفوظة بمكتبة الأزهر الشريف</h2>
+      <p>ابحث في قائمة حصر الملفات والسجلات بعنوان الملف أو موضوع الوثيقة أو السنة، أو تصفّح الموضوعات الرئيسية والفرعية.</p>
+      <a class="btn gold" href="/search.html">خيارات البحث ←</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="statFiles">—</b><span class="small">ملفًا في قائمة الحصر</span></div>
+      <div class="stat"><b id="statRegisters">—</b><span class="small">سجلًا في قائمة الحصر</span></div>
+      <div class="stat"><b id="statSubjects">—</b><span class="small">موضوعًا رئيسيًا وفرعيًا</span></div>
+    </div>
+    <h3 class="gap">تصفّح الموضوعات الرئيسية</h3>
+    <div class="topics" id="topics"></div>
+  </section>
+
+  <!-- مقدمة -->
+  <section data-page="intro" class="hidden">
+    <span class="eyebrow">عن المجموعة الأرشيفية</span>
+    <h2>مقدمة</h2>
+    <div class="box">
+      <p>تعتبر وثائق المجلس الأعلى للأزهر من المصادر التي تحتوي على الكثير من المعلومات التاريخية المتميزة والمتنوعة، نتيجة نشاط المجلس الأعلى للأزهر أثناء تأدية عمله لتحقيق اختصاصاته أثناء الفترة التاريخية من 1917 : 1980م.</p>
+      <p>ونتيجة لاختصاصات المجلس الأعلى للأزهر تعددت وتنوعت موضوعات الوثائق، ويمكن ذكر بعض منها على سبيل المثال:</p>
+      <ol class="subject-list" id="introSubjects">
+        <li>إعانات</li><li>امتحانات</li><li>أوامر ملكية</li><li>أوقاف</li><li>بعثات</li>
+        <li>تعليم</li><li>شئون الطلاب</li><li>شئون المعاهد</li><li>ميزانيات</li><li>هيئة إدارية</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- الهدف من إنشاء قاعدة البيانات -->
+  <section data-page="goal" class="hidden">
+    <span class="eyebrow">المعرفة أقرب إلى الباحث</span>
+    <h2>الهدف من إنشاء قاعدة البيانات</h2>
+    <div class="box"><span class="eyebrow">01</span><h3>استرجاع ذكي وسريع</h3>
+      <p>يهدف إنشاء قاعدة البيانات إلى بناء نظام استرجاع ذكي وسريع لتوفير المعلومات اللازمة للباحثين.</p></div>
+    <div class="box gap"><span class="eyebrow">02</span><h3>الوصول إلى الوثائق بسهولة ويسر</h3>
+      <p>إمكانية الوصول إلى الوثائق بسهولة ويسر بدلًا من التقليب اليدوي المرهق.</p></div>
+    <div class="box gap"><span class="eyebrow">03</span><h3>استخدام متزامن</h3>
+      <p>السماح لأكثر من شخص باستخدام قاعدة البيانات في وقت واحد.</p></div>
+  </section>
+
+  <!-- دليل استخدام قاعدة البيانات -->
+  <section data-page="guide" class="hidden">
+    <span class="eyebrow">من البحث إلى الاطلاع</span>
+    <h2>دليل استخدام قاعدة البيانات</h2>
+    <div class="items">
+      <div class="step"><span>01</span>الدخول على الإنترنت عبر الرابط التالي: <a id="siteLink" class="eyebrow" href="/"></a></div>
+      <div class="step"><span>02</span>تسجيل الدخول على القاعدة بواسطة اسم المستخدم وكلمة المرور.</div>
+      <div class="step"><span>03</span>يمكن البحث في القاعدة من خلال كتابة أحد المداخل التالية في خانة البحث: (عنوان الملف – موضوع الوثيقة – السنة) ثم الضغط على علامة العدسة 🔍.</div>
+      <div class="step"><span>04</span>لا يمكن تحميل الوثائق (اطلاع فقط).</div>
+      <div class="step"><span>05</span>يمكن استخدام مفاتيح التفاعل داخل التسجيلة (تكبير – تصغير – تقديم – تأخير – إنهاء عرض).</div>
+      <div class="step"><span>06</span>يمكن عمل تقرير بنتائج البحث، بتحديد أحد المداخل، في مخرج إكسيل شيت.</div>
+      <div class="step"><span>07</span>يمكن طباعة نتيجة البحث.</div>
+      <div class="step"><span>08</span>يمكن البحث بالتاريخ، وبالموضوعات، وبعناوين الملفات.</div>
+      <div class="step"><span>09</span>اختر الموضوع الرئيسي ثم الفرعي من القائمة أعلى شاشة البحث لتظهر الملفات والسجلات الخاصة به.</div>
+      <div class="step"><span>10</span>يظهر للباحث عدد الملفات والسجلات طبقًا لموضوع بحثه.</div>
+    </div>
+    <div class="gap"><a class="btn" href="/search.html">الانتقال إلى البحث ←</a></div>
+  </section>
+</main>
+<div class="footer">قاعدة بيانات وثائق وسجلات المجلس الأعلى للأزهر — مكتبة الأزهر الشريف</div>
+
+<script src="/js/common.js"></script>
+<script>
+  const PAGES = ['home', 'intro', 'goal', 'guide'];
+
+  function showPage() {
+    const id = PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home';
+    document.querySelectorAll('[data-page]').forEach(s => s.classList.toggle('hidden', s.dataset.page !== id));
+    setActiveNav(id);
+  }
+
+  (async () => {
+    await initShell('home');
+    showPage();
+    window.addEventListener('hashchange', showPage);
+
+    const link = document.getElementById('siteLink');
+    link.href = location.origin + '/';
+    link.textContent = location.origin + '/';
+
+    const [stats, tree] = await Promise.all([Api.get('/api/stats'), Api.get('/api/subjects')]);
+    document.getElementById('statFiles').textContent = stats.fileCount;
+    document.getElementById('statRegisters').textContent = stats.registerCount;
+    document.getElementById('statSubjects').textContent = stats.subjectCount;
+    document.getElementById('topics').innerHTML = tree.map(s => `
+      <a class="topic" href="/search.html?subject=${s.id}">
+        <b>${esc(s.name)}</b>
+        <span class="small">${s.fileCount} ملف • ${s.registerCount} سجل</span>
+      </a>`).join('');
+  })();
+</script>
+</body>
+</html>

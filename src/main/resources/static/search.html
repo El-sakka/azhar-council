@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>خيارات البحث — وثائق وسجلات المجلس الأعلى للأزهر</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div id="shell"></div>
+
+<main>
+  <div class="no-print">
+    <span class="eyebrow">الفهرس الإلكتروني</span>
+    <h2>ابحث في الوثائق والسجلات</h2>
+
+    <form class="box" id="searchForm" autocomplete="off">
+      <!-- combo boxes: main / sub / detailed subject -->
+      <div class="search-grid">
+        <div>
+          <label for="subjectMain">الموضوع الرئيسي</label>
+          <select class="field" id="subjectMain"><option value="">كل الموضوعات — قائمة الحصر ككل</option></select>
+        </div>
+        <div>
+          <label for="subjectSub">الموضوع الفرعي</label>
+          <select class="field" id="subjectSub" disabled><option value="">اختر الموضوع الرئيسي أولًا</option></select>
+        </div>
+        <div id="subjectDetailWrap" class="hidden">
+          <label for="subjectDetail">الموضوع التفصيلي</label>
+          <select class="field" id="subjectDetail"><option value="">الكل</option></select>
+        </div>
+      </div>
+
+      <div class="search-line gap">
+        <div>
+          <label for="field">مدخل البحث</label>
+          <select class="field" id="field">
+            <option value="all">كل المداخل</option>
+            <option value="title">عنوان الملف / السجل</option>
+            <option value="subject">موضوع الوثيقة</option>
+            <option value="year">السنة</option>
+          </select>
+        </div>
+        <div>
+          <label for="q">قيمة البحث</label>
+          <input class="field" id="q" type="search" placeholder="اكتب عنوان الملف أو موضوع الوثيقة أو السنة…">
+        </div>
+        <button class="btn lens" type="submit" title="بحث" aria-label="بحث"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
+      </div>
+
+      <div class="years gap">
+        <div>
+          <label for="yearFrom">البحث بالتاريخ: من سنة</label>
+          <input class="field" id="yearFrom" type="number" min="1800" max="2100" placeholder="1917">
+        </div>
+        <div>
+          <label for="yearTo">إلى سنة</label>
+          <input class="field" id="yearTo" type="number" min="1800" max="2100" placeholder="1980">
+        </div>
+        <div class="row" style="justify-content:flex-start">
+          <button class="btn" type="submit">بحث</button>
+          <button class="btn soft" type="button" id="clearBtn">مسح</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <section class="box gap" id="results" aria-live="polite">
+    <div class="row">
+      <div>
+        <span class="eyebrow" id="resultsScope">قائمة الحصر ككل</span>
+        <h3 id="resultsTitle" style="margin:4px 0 8px">نتائج البحث</h3>
+        <div class="summary" id="summary"></div>
+      </div>
+      <div class="row no-print">
+        <button class="btn soft" type="button" id="exportBtn">تصدير Excel ↓</button>
+        <button class="btn soft" type="button" id="printBtn">طباعة النتائج</button>
+      </div>
+    </div>
+    <div class="tabs gap no-print" id="tabs">
+      <button class="tab active" type="button" data-tab="files">الملفات <span class="count" id="countFiles">0</span></button>
+      <button class="tab" type="button" data-tab="registers">السجلات <span class="count" id="countRegisters">0</span></button>
+    </div>
+    <div id="resultsBody"></div>
+    <div class="row gap no-print" id="pagerRow">
+      <span class="small" id="pageInfo"></span>
+      <div class="pager">
+        <button class="tab" type="button" id="prevPage">السابق</button>
+        <span class="small" id="pageNo"></span>
+        <button class="tab" type="button" id="nextPage">التالي</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- filled only while printing: all results, not just the current page -->
+  <section id="printArea" class="print-only"></section>
+</main>
+<div class="footer">لا يمكن تحميل الوثائق (اطلاع فقط) • التصدير والطباعة خاصان بنتائج البحث في الفهرس</div>
+
+<!-- record viewer: zoom in/out, previous/next, end view -->
+<div class="overlay hidden" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+  <div class="viewer">
+    <div class="viewer-bar">
+      <div class="row" style="gap:6px">
+        <button class="btn soft" type="button" id="zoomIn" title="تكبير">تكبير +</button>
+        <button class="btn soft" type="button" id="zoomOut" title="تصغير">تصغير −</button>
+      </div>
+      <div class="row" style="gap:6px">
+        <button class="tab" type="button" id="viewPrev">→ تأخير</button>
+        <span class="small" id="viewPos"></span>
+        <button class="tab" type="button" id="viewNext">تقديم ←</button>
+      </div>
+      <button class="btn" type="button" id="viewClose">إنهاء العرض ×</button>
+    </div>
+    <div class="viewer-body"><div class="viewer-zoom" id="viewerContent"></div></div>
+  </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

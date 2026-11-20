@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>تسجيل الدخول — وثائق وسجلات المجلس الأعلى للأزهر</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="login-page">
+  <section class="login-hero">
+    <h1>قاعدة بيانات
+      <span>وثائق وسجلات المجلس الأعلى للأزهر</span>
+      <span>المحفوظة بمكتبة الأزهر الشريف</span>
+    </h1>
+    <p>ذاكرة مؤسسية للفترة 1917 – 1980م، تتيح للباحثين الاطلاع على قوائم حصر الملفات والسجلات والبحث فيها بالعنوان والموضوع والتاريخ.</p>
+    <figure class="cover" style="margin:0">
+      <img src="/img/cover.jpg" alt="غلاف رسالة: وثائق وسجلات المجلس الأعلى للأزهر المودعة بمكتبة الأزهر 1917: 1980م — دراسة أرشيفية دبلوماتية">
+    </figure>
+  </section>
+
+  <section class="login-side">
+    <form class="login" id="loginForm" novalidate>
+      <span class="eyebrow">مرحبًا بك</span>
+      <h2>تسجيل الدخول</h2>
+      <p>أدخل اسم المستخدم وكلمة المرور للدخول إلى القاعدة.</p>
+
+      <label for="username">اسم المستخدم</label>
+      <input class="field" id="username" name="username" autocomplete="username" required>
+
+      <label for="password">كلمة المرور</label>
+      <div class="pw">
+        <input class="field" id="password" name="password" type="password" autocomplete="current-password" required>
+        <button type="button" id="togglePw" aria-label="إظهار كلمة المرور">إظهار</button>
+      </div>
+
+      <div class="error" id="error" role="alert"></div>
+      <button class="btn" type="submit" id="submitBtn">دخول إلى القاعدة ←</button>
+      <p class="small" style="text-align:center;margin-top:18px">للمساعدة في الدخول، يرجى التواصل مع مسؤول القاعدة.</p>
+    </form>
+  </section>
+
+  <script src="/js/common.js"></script>
+  <script>
+    // Already signed in? go straight to the interface page.
+    fetch('/api/auth/me', { credentials: 'same-origin' }).then(r => { if (r.ok) location.replace('/index.html'); });
+
+    const form = document.getElementById('loginForm');
+    const error = document.getElementById('error');
+    const pw = document.getElementById('password');
+    document.getElementById('togglePw').addEventListener('click', e => {
+      const show = pw.type === 'password';
+      pw.type = show ? 'text' : 'password';
+      e.currentTarget.textContent = show ? 'إخفاء' : 'إظهار';
+    });
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      error.textContent = '';
+      const username = form.username.value.trim();
+      const password = form.password.value;
+      if (!username || !password) { error.textContent = 'يرجى إدخال اسم المستخدم وكلمة المرور'; return; }
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      try {
+        await Api.post('/api/auth/login', { username, password });
+        location.replace('/index.html');
+      } catch (err) {
+        error.textContent = err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
